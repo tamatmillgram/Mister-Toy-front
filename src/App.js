@@ -1,22 +1,32 @@
+import { Route, HashRouter as Router, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store/store.js';
 import './assets/css/main.css';
+
+import ToyIndex from './views/toy-index';
+import ToyEdit from './views/toy-edit';
+// import AppHeader from './cmps/app-header';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+    <Router>
+        <section className="main-layout app">
+            {/* <AppHeader /> */}
+            <main>
+                <Routes>
+                    {/* <Route element={<HomePage />} path="/" />
+                    <Route element={<AboutUs />} path="/about" /> */}
+                    <Route element={<ToyIndex />} path="/toy" />
+                    <Route element={<ToyEdit />} path="/toy" />
+                    <Route element={<ToyEdit />} path="/toy/:toyId" />
+                </Routes>
+            </main>
+        </section>
+    </Router>
+</Provider>
   );
 }
 
