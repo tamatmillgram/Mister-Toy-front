@@ -16,20 +16,24 @@ export const toyService = {
     getEmptyToy,
     getDefaultFilter,
     getLabels,
+    getToysPerInStock,
+    getAveragePricePerLabel
 }
-
 
 
 function query(filterBy = {}) {
     return httpService.get(BASE_URL, filterBy)
 }
+
 function getById(toyId) {
     return httpService.get(BASE_URL + toyId)
 }
+
 function remove(toyId) {
     // return Promise.reject('Not now!')
     return httpService.delete(BASE_URL + toyId)
 }
+
 function save(toy) {
     if (toy._id) {
         return httpService.put(BASE_URL, toy)
@@ -90,5 +94,65 @@ function getDefaultFilter() {
 
 function getLabels() {
     return labels
+}
+
+function getToysPerInStock(toys) {
+    const toysMap = toys.reduce((acc, toy) => {
+        toy.labels.forEach(label => {
+
+            if (acc[label]) {
+                if (toy.inStock === 'true') {
+                    acc[label].inStock++
+                    acc[label].amount++
+                }
+            } else {
+                if (toy.inStock === 'true') {
+                    acc[label]={inStock: 1}
+                
+                } else {
+                    acc[label]={inStock: 0}
+                }
+                acc[label].amount = 1
+            }
+        });
+        return acc
+    }, {})
+    const labels = Object.keys(toysMap)
+    const values = Object.values(toysMap)
+    const percentages =  values.map((value)=> {
+        return +((value.inStock * 100) / value.amount).toFixed(0)
+    })
+    const res = {
+        labels:labels,
+        percentages: percentages
+    }
+
+   return res
+}
+
+function getAveragePricePerLabel(toys) {
+    const avgPriceByLabel = toys.reduce((acc, toy) => {
+        if (toy.labels.length) {
+            toy.labels.forEach(label => {
+             if (acc[label]) acc[label].price += toy.price
+                if (!acc[label]) acc[label] = {
+                    count: 0,
+                    price: toy.price,
+                }
+                acc[label].count++
+            })
+        }
+        return acc
+    }, {})
+    const labels = Object.keys(avgPriceByLabel)
+    const values = Object.values(avgPriceByLabel)
+    const priceAvg =  values.map((value)=> {
+        return +(value.price/value.count).toFixed(0)
+    })
+    const res = {
+        labels,
+        priceAvg: priceAvg
+    }
+    return res
 }
 

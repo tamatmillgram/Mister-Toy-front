@@ -2,10 +2,10 @@ import {  useSelector } from 'react-redux'
 
 import { toyService } from '../services/toy.service.js'
 
-import { useEffect, useState } from 'react'
+import { useEffect,  } from 'react'
 import { loadToys, removeToy, saveToy } from '../store/toy.action.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_TOY_TO_CART } from '../store/toy.reducer.js'
+// import { ADD_TOY_TO_CART } from '../store/toy.reducer.js'
 import { saveFilter } from '../store/filter.action.js'
 import { Link, useNavigate } from 'react-router-dom'
 import ToyFilter from '../cmps/toy-filter.jsx'

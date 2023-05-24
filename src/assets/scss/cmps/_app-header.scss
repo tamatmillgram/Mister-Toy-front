@@ -1,0 +1,42 @@
+.app-header {
+    @include flex();
+    @include align-center();
+    @include between();
+    padding: rem(30px);
+    background-color: $clr5 ;
+    box-shadow: rgba(96, 96, 95, 0.24) 0px 3px 8px;
+}
+
+.main-nav {
+    @include flex();
+    @include between();
+    gap: rem(20px);
+    color: black;
+
+    a {
+        transition: .1.8s ease-in-out;
+        font-weight: 700;
+        font-size: rem(30px);
+        padding: rem(10px);
+
+        &.active {
+            color: white;
+            background-color: lighten($clr2,5%);
+            border-radius: em(13px);
+        }
+
+        &:hover {
+            color: white;
+            background-color: lighten($clr2,5%);
+            border-radius: em(13px);
+        }
+    }
+
+
+}
+
+.logo {
+    img {
+        height: rem(130px);
+    }
+}

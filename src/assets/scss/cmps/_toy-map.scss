@@ -1,0 +1,19 @@
+.map-container {
+    @include flex();
+    gap: rem(50px);
+    @include between();
+
+    .map {
+        height: rem(1000px);
+        width: rem(700px);
+        margin: rem(50px);
+        border: solid $clr7 rem(8px);
+        border-radius: rem(15px);
+    }
+
+    button{
+        background-color: $clr7;
+        height: rem(50px);
+        width: rem(90px);
+    }
+}

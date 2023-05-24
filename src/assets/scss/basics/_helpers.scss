@@ -1,36 +1,39 @@
-.flex {
+@mixin flex {
   display: flex;
 }
 
-.column {
+@mixin column {
   flex-direction: column;
 }
 
-.justify-center {
+@mixin justify-center {
   justify-content: center;
 }
 
-.align-center {
+@mixin align-center  {
   align-items: center;
 }
 
-.between {
+@mixin between  {
   justify-content: space-between;
 }
 
-.center {
+@mixin center  {
   align-items: center;
   justify-content: center;
 }
 
-.grid {
+@mixin grid  {
   display: grid;
 }
 
-.hidden {
+@mixin hidden  {
   display: none;
 }
 
-.clean-list {
+@mixin clean-list {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
